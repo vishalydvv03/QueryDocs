@@ -33,3 +33,4 @@ C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Services\obj\Debug\net8.0\refint\RA
 C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Services\obj\Debug\net8.0\RAGChatBot.Services.pdb
 C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Services\obj\Debug\net8.0\ref\RAGChatBot.Services.dll
 C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Services\obj\Debug\net8.0\RAGChatBot.Services.sourcelink.json
+C:\Users\visha\source\repos\RAGChatBot\RAGChatBot.Services\obj\Debug\net8.0\RAGChatBot.Services.sourcelink.json

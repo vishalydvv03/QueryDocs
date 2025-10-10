@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using OpenAI;
 using OpenAI.Chat;
 using Pinecone;
+using RAGChatBot.Domain.Entities;
 using RAGChatBot.Domain.Models;
+using RAGChatBot.Infrastructure.DbContexts;
 using RAGChatBot.Infrastructure.ResponseHelpers;
 using RAGChatBot.Services.OpenAIServices;
-using System.ClientModel;
 using System.Security.Claims;
 
 
@@ -14,17 +16,19 @@ namespace RAGChatBot.Services.PineconeServices
 {
     public class PineconeService : IPineconeService
     {
+        private readonly ChatDbContext dbContext;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly PineconeClient pineconeClient;
         private readonly IOpenAIService openAiService;
         private readonly PineconeSettings pineconeSettings;
 
-        public PineconeService(IOptions<PineconeSettings> pineconeSettings, IHttpContextAccessor httpContextAccessor, OpenAIClient openAiClient, IOpenAIService openAiService, IOptions<OpenAISettings> openAiSettings, PineconeClient pineconeClient)
+        public PineconeService(IOptions<PineconeSettings> pineconeSettings, IHttpContextAccessor httpContextAccessor, OpenAIClient openAiClient, IOpenAIService openAiService, IOptions<OpenAISettings> openAiSettings, PineconeClient pineconeClient, ChatDbContext dbContext)
         {
             this.pineconeClient = pineconeClient;
             this.pineconeSettings = pineconeSettings.Value;
             this.httpContextAccessor = httpContextAccessor;
             this.openAiService = openAiService;
+            this.dbContext = dbContext;
         }
 
         public async Task UpsertEmbeddingsAsync(List<EmbeddingChunk> embeddingChunks, string fileName)
@@ -38,10 +42,11 @@ namespace RAGChatBot.Services.PineconeServices
                 ["user"] = userId
             };
             await index.Delete(filter);
+            var uniqueId = Guid.NewGuid();
 
             var vectors = embeddingChunks.Select((chunk, i) => new Vector
             {
-                Id = $"{userId}-{fileName}-{i}-{Guid.NewGuid()}",
+                Id = $"{userId}-{fileName}-{i}-{uniqueId}",
                 Values = chunk.Vector,
                 Metadata = new MetadataMap
                 {
@@ -58,11 +63,20 @@ namespace RAGChatBot.Services.PineconeServices
         public async Task<ServiceResult> GenerateAnswer(QueryRequest query)
         {
             var result = new ServiceResult();
+            var userId = Convert.ToInt32(httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
             var index = await pineconeClient.GetIndex(pineconeSettings.Index);
             var queryVector = await openAiService.CreateEmbeddings(query.Query);
 
-            var searchResult = await index.Query(queryVector, topK: Convert.ToUInt32(query.TopK), includeMetadata: true);
+            var searchFilter = new MetadataMap
+            {
+                ["user"] = new MetadataMap
+                {
+                    ["$eq"] = userId.ToString()
+                }
+            };
+
+            var searchResult = await index.Query(queryVector, topK: Convert.ToUInt32(query.TopK), includeMetadata: true, filter: searchFilter);
 
             if (searchResult.Length == 0)
             {
@@ -76,22 +90,33 @@ namespace RAGChatBot.Services.PineconeServices
 
                 var context = string.Join("\n", chunks);
 
-                var systemMessage = ChatMessage.CreateSystemMessage(
-                                @"
-                                1.You are a helpful, friendly, and professional AI assistant.
-                                2.Always provide clear, step-by-step explanations for technical questions.
-                                3.Include examples, code snippets, or best practices when relevant.
-                                4.Respond to greetings with a friendly reply.
-                                5.If a question is ambiguous, ask politely for clarification.
-                                6.When explaining concepts, start simple, then add technical details and keep it summarized.
-                                7.Answer only on the basis of context provided in the user message and don't hallucinate.
-                                "
+                var previousChats = await dbContext.ChatLogs
+                    .Where(c => c.UserId == userId)
+                    .OrderByDescending(c => c.Id)
+                    .Take(5)
+                    .ToListAsync();
+
+                var history = string.Join("\n", previousChats.Select(c => $"UserQuery: {c.Query}\nBotReponse: {c.Response}\n"));
+
+                var systemMessage = ChatMessage.CreateSystemMessage(@"
+                    You are a helpful, friendly, and professional AI assistant. 
+                    Your goal is to provide accurate, concise, and context-aware responses in a human friendly way.
+
+                    Guidelines:
+                    - Provide clear, step-by-step explanations for technical questions.
+                    - Respond to greetings politely and naturally.
+                    - If a question is ambiguous, ask the user for clarification.
+                    - Start with a simple explanation before adding technical depth and keep it short and concise.
+                    - Use only the information from the provided context or previous conversation.
+                    - Never fabricate or assume facts not found in the given data.
+                    - When the question refers to past conversation, incorporate the relevant history into your answer."
                 );
 
                 var userMessage = ChatMessage.CreateUserMessage($@"
-                            Context: {context}
-                            Question: {query.Query}
-                            Answer:"
+                    Previous conversation: {history}
+                    Context from documents: {context}
+                    New question: {query.Query}
+                    Answer:"
                 );
 
                 var messages = new List<ChatMessage>
@@ -104,6 +129,17 @@ namespace RAGChatBot.Services.PineconeServices
 
                 ChatCompletion completion = await chatClient.CompleteChatAsync(messages);
                 string answer = completion.Content[0].Text;
+
+                var log = new ChatLog
+                {
+                    Query = query.Query,
+                    Response = answer,
+                    ContextChunk = context,
+                    UserId = userId
+                };
+
+                dbContext.ChatLogs.Add(log);
+                await dbContext.SaveChangesAsync();
                 result.SetSuccess(answer);
             }
             return result;

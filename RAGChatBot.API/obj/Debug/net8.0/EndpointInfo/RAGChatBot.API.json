@@ -150,7 +150,7 @@
         }
       }
     },
-    "/api/query/query": {
+    "/api/query": {
       "post": {
         "tags": [
           "Query"

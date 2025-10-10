@@ -23,3 +23,4 @@ C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Domain\obj\Debug\net8.0\refint\RAGC
 C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Domain\obj\Debug\net8.0\RAGChatBot.Domain.pdb
 C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Domain\obj\Debug\net8.0\ref\RAGChatBot.Domain.dll
 C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Domain\obj\Debug\net8.0\RAGChatBot.Domain.sourcelink.json
+C:\Users\visha\source\repos\RAGChatBot\RAGChatBot.Domain\obj\Debug\net8.0\RAGChatBot.Domain.sourcelink.json

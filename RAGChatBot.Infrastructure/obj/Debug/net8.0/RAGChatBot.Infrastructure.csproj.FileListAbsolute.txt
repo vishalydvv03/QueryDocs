@@ -33,3 +33,4 @@ C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Infrastructure\obj\Debug\net8.0\RAG
 C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Infrastructure\obj\Debug\net8.0\RAGChatBot.Infrastructure.genruntimeconfig.cache
 C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Infrastructure\obj\Debug\net8.0\ref\RAGChatBot.Infrastructure.dll
 C:\Users\Nimap\Desktop\RAGChatBot\RAGChatBot.Infrastructure\obj\Debug\net8.0\RAGChatBot.Infrastructure.sourcelink.json
+C:\Users\visha\source\repos\RAGChatBot\RAGChatBot.Infrastructure\obj\Debug\net8.0\RAGChatBot.Infrastructure.sourcelink.json

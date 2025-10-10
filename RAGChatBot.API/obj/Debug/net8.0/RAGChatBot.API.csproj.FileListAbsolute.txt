@@ -371,3 +371,4 @@ C:\Users\visha\source\repos\RAGChatBot\RAGChatBot.API\bin\Debug\net8.0\Microsoft
 C:\Users\visha\source\repos\RAGChatBot\RAGChatBot.API\bin\Debug\net8.0\Microsoft.Kiota.Serialization.Text.dll
 C:\Users\visha\source\repos\RAGChatBot\RAGChatBot.API\bin\Debug\net8.0\Pinecone.dll
 C:\Users\visha\source\repos\RAGChatBot\RAGChatBot.API\bin\Debug\net8.0\Std.UriTemplate.dll
+C:\Users\visha\source\repos\RAGChatBot\RAGChatBot.API\obj\Debug\net8.0\RAGChatBot.API.sourcelink.json

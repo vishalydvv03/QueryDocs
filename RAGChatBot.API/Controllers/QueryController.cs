@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RAGChatBot.Domain.Models;
@@ -8,6 +9,7 @@ using System.Security.Claims;
 
 namespace RAGChatBot.API.Controllers
 {
+    [Authorize]
     [Route("api/query")]
     [ApiController]
     public class QueryController : ControllerBase
@@ -18,7 +20,7 @@ namespace RAGChatBot.API.Controllers
             this.pineconeService = pineconeService;
         }
 
-        [HttpPost("query")]
+        [HttpPost]
         public async Task<ServiceResult> AskQuery([FromBody] QueryRequest query)
         {
             var result = new ServiceResult();

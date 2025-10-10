@@ -80,7 +80,7 @@
   {
     "ContainingType": "RAGChatBot.API.Controllers.QueryController",
     "Method": "AskQuery",
-    "RelativePath": "api/query/query",
+    "RelativePath": "api/query",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
