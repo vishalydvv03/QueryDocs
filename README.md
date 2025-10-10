@@ -40,7 +40,24 @@ cd RAGChatBot
 ```
 ---
 
-### 2️⃣ Configure appsettings.json file
+### 2️⃣ Obtain API Keys
+
+#### OpenAI API Key
+1. Sign up or log in at [OpenAI](https://platform.openai.com/).  
+2. Navigate to **API Keys** in your account settings.  
+3. Click **Create new secret key** and copy it.  
+4. Keep it safe; you will need it for the `.env` or `appsettings.json` file.  
+
+#### Pinecone API Key
+1. Sign up or log in at [Pinecone](https://www.pinecone.io/).  
+2. Navigate to **API Keys** in your account dashboard.  
+3. Click **Create new API key** and copy it.  
+4. Note your **environment name** (e.g., `us-east1-gcp`).  
+5. Keep it safe; you will need it for the `.env` or `appsettings.json` file.
+
+---
+
+### 3️⃣ Configure appsettings.json file
 ```
 "ConnectionStrings": {
   "dbcs": "Server=YourServerName;Database=YourDbName;Trusted_Connection=True;TrustServerCertificate=True;"
@@ -63,11 +80,18 @@ cd RAGChatBot
 }
 ```
 
-### 3️⃣ Install Dependencies 
+### 4️⃣ Install Dependencies 
 ```bash
 dotnet restore
 ```
 ---
+
+### 5️⃣ Database Setup with Migration Script
+
+1. Open your Database Server Client like SSMS and run the [Migration Script](RAGChatBot.Infrastructure/SqlScripts/DbSetupScript.sql)
+   
+---
+
 ## 📚 References
 - [OpenAI API Docs](https://platform.openai.com/docs)
 - [Pinecone Docs](https://docs.pinecone.io)
@@ -76,11 +100,6 @@ dotnet restore
 
 ---
 
-### 4️⃣ Database Setup with Migration Script
-
-1. Open your Database Server Client like SSMS and run the [Migration Script](RAGChatBot.Infrastructure/SqlScripts/DbSetupScript.sql)  
-
----
 ## 👨‍💻 Author
 **Vishal Yadav**  
 📧 [vishaljyadav576@gmail.com](mailto:vishaljyadav576@gmail.com)  
