@@ -1,11 +1,8 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RAGChatBot.Domain.Models;
 using RAGChatBot.Infrastructure.ResponseHelpers;
 using RAGChatBot.Services.PineconeServices;
-using System.Security.Claims;
 
 namespace RAGChatBot.API.Controllers
 {

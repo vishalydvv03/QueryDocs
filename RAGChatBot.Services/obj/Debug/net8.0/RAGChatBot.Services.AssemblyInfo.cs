@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RAGChatBot.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cabe854375443185465aecbb8c6ec16e2976d27b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+04afb9e0bca2cf7fc5e776949d5d729e83ea9c7a")]
 [assembly: System.Reflection.AssemblyProductAttribute("RAGChatBot.Services")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RAGChatBot.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

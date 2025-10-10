@@ -2,12 +2,8 @@
 using OpenAI;
 using OpenAI.Chat;
 using RAGChatBot.Domain.Models;
-using System;
 using System.ClientModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace RAGChatBot.Services.OpenAIServices
 {

@@ -1,21 +1,10 @@
-﻿using DocumentFormat.OpenXml.Office2013.Drawing.ChartStyle;
-using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml.Packaging;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using OpenAI;
 using RAGChatBot.Domain.Models;
 using RAGChatBot.Infrastructure.ResponseHelpers;
 using RAGChatBot.Services.OpenAIServices;
 using RAGChatBot.Services.PineconeServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text;
-using System.Threading.Tasks;
 using UglyToad.PdfPig;
 
 namespace RAGChatBot.Services.DocumentServices

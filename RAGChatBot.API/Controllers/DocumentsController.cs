@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using RAGChatBot.Domain.Models;
 using RAGChatBot.Infrastructure.ResponseHelpers;
 using RAGChatBot.Services.DocumentServices;
-using System.Security.Claims;
 
 namespace RAGChatBot.API.Controllers
 {
