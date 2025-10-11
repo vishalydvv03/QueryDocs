@@ -94,7 +94,7 @@ CREATE DATABASE QueryDocsDb;
 GO;
 USE QueryDocsDb;
 ```
-2. Run the [Migration Script](QueyDocs.Infrastructure/SqlScripts/DbSetupScript.sql)
+2. Run the [Migration Script](QueryDocs.Infrastructure/SqlScripts/DbSetupScript.sql)
    
 ---
 
