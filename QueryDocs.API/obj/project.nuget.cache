@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CmyCFoJe58w=",
+  "dgSpecHash": "vNM3BEKBQss=",
   "success": true,
-  "projectFilePath": "C:\\Users\\visha\\Desktop\\QueryDocs\\QueryDocs.API\\QueryDocs.API.csproj",
+  "projectFilePath": "C:\\Users\\visha\\source\\repos\\QueryDocs\\QueryDocs.API\\QueryDocs.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\visha\\.nuget\\packages\\azure.core\\1.44.1\\azure.core.1.44.1.nupkg.sha512",
     "C:\\Users\\visha\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

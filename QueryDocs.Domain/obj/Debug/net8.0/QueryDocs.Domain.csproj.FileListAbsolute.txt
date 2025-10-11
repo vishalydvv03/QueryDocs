@@ -11,3 +11,16 @@ C:\Users\visha\Desktop\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\QueryDocs.Dom
 C:\Users\visha\Desktop\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\refint\QueryDocs.Domain.dll
 C:\Users\visha\Desktop\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\QueryDocs.Domain.pdb
 C:\Users\visha\Desktop\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\ref\QueryDocs.Domain.dll
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\bin\Debug\net8.0\QueryDocs.Domain.deps.json
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\bin\Debug\net8.0\QueryDocs.Domain.dll
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\bin\Debug\net8.0\QueryDocs.Domain.pdb
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\QueryDocs.Domain.csproj.AssemblyReference.cache
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\QueryDocs.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\QueryDocs.Domain.AssemblyInfoInputs.cache
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\QueryDocs.Domain.AssemblyInfo.cs
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\QueryDocs.Domain.csproj.CoreCompileInputs.cache
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\QueryDocs.Domain.sourcelink.json
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\QueryDocs.Domain.dll
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\refint\QueryDocs.Domain.dll
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\QueryDocs.Domain.pdb
+C:\Users\visha\source\repos\QueryDocs\QueryDocs.Domain\obj\Debug\net8.0\ref\QueryDocs.Domain.dll

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ur9p9/HVN70=",
+  "dgSpecHash": "OCdYd0SksBo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\visha\\Desktop\\QueryDocs\\QueryDocs.Domain\\QueryDocs.Domain.csproj",
+  "projectFilePath": "C:\\Users\\visha\\source\\repos\\QueryDocs\\QueryDocs.Domain\\QueryDocs.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\visha\\.nuget\\packages\\documentformat.openxml\\3.3.0\\documentformat.openxml.3.3.0.nupkg.sha512",
     "C:\\Users\\visha\\.nuget\\packages\\documentformat.openxml.framework\\3.3.0\\documentformat.openxml.framework.3.3.0.nupkg.sha512",

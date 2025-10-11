@@ -1149,11 +1149,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\visha\\Desktop\\QueryDocs\\QueryDocs.Domain\\QueryDocs.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\visha\\source\\repos\\QueryDocs\\QueryDocs.Domain\\QueryDocs.Domain.csproj",
       "projectName": "QueryDocs.Domain",
-      "projectPath": "C:\\Users\\visha\\Desktop\\QueryDocs\\QueryDocs.Domain\\QueryDocs.Domain.csproj",
+      "projectPath": "C:\\Users\\visha\\source\\repos\\QueryDocs\\QueryDocs.Domain\\QueryDocs.Domain.csproj",
       "packagesPath": "C:\\Users\\visha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\visha\\Desktop\\QueryDocs\\QueryDocs.Domain\\obj\\",
+      "outputPath": "C:\\Users\\visha\\source\\repos\\QueryDocs\\QueryDocs.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

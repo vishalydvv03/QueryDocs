@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QueryDocs.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cedc058750186208c7ad7135bbc570f8c0c8f17d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6d4a39fa457d135652eab31afb0e4664c8510bc")]
 [assembly: System.Reflection.AssemblyProductAttribute("QueryDocs.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QueryDocs.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

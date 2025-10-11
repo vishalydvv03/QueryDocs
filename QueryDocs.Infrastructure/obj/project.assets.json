@@ -4704,11 +4704,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\visha\\Desktop\\QueryDocs\\QueryDocs.Infrastructure\\QueryDocs.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\visha\\source\\repos\\QueryDocs\\QueryDocs.Infrastructure\\QueryDocs.Infrastructure.csproj",
       "projectName": "QueryDocs.Infrastructure",
-      "projectPath": "C:\\Users\\visha\\Desktop\\QueryDocs\\QueryDocs.Infrastructure\\QueryDocs.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\visha\\source\\repos\\QueryDocs\\QueryDocs.Infrastructure\\QueryDocs.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\visha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\visha\\Desktop\\QueryDocs\\QueryDocs.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\visha\\source\\repos\\QueryDocs\\QueryDocs.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4729,8 +4729,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\visha\\Desktop\\QueryDocs\\QueryDocs.Domain\\QueryDocs.Domain.csproj": {
-              "projectPath": "C:\\Users\\visha\\Desktop\\QueryDocs\\QueryDocs.Domain\\QueryDocs.Domain.csproj"
+            "C:\\Users\\visha\\source\\repos\\QueryDocs\\QueryDocs.Domain\\QueryDocs.Domain.csproj": {
+              "projectPath": "C:\\Users\\visha\\source\\repos\\QueryDocs\\QueryDocs.Domain\\QueryDocs.Domain.csproj"
             }
           }
         }
