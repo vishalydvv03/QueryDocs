@@ -1,4 +1,4 @@
-# 🧠 Intelligent Knowledge Assistant (RAG + GenAI Backend)
+# 🧠 QueryDocs - Intelligent Knowledge Assistant 
 
 ## 📘 Overview  
 This project implements a **Retrieval-Augmented Generation (RAG)** powered **Intelligent Knowledge Assistant**, enabling users to upload documents (PDF or Text or Docx), ask questions, and receive **context-aware AI-generated responses**.  
@@ -35,7 +35,7 @@ The system integrates **document retrieval**, **vector embeddings**, and **Gener
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://gitlab.com/vishalyddv03/RAGChatBot.git
+git clone https://gitlab.com/vishalyddv03/QueryDocs.git
 cd RAGChatBot
 ```
 ---
@@ -60,7 +60,7 @@ cd RAGChatBot
 ### 3️⃣ Configure appsettings.json file
 ```
 "ConnectionStrings": {
-  "dbcs": "Server=YourServerName;Database=YourDbName;Trusted_Connection=True;TrustServerCertificate=True;"
+  "dbcs": "Server=YourServerName;Database=QueryDocsDb;Trusted_Connection=True;TrustServerCertificate=True;"
 },
 "Jwt": {
   "Key": "YourSecretKey",
@@ -88,7 +88,13 @@ dotnet restore
 
 ### 5️⃣ Database Setup with Migration Script
 
-1. Open your Database Server Client like SSMS and run the [Migration Script](RAGChatBot.Infrastructure/SqlScripts/DbSetupScript.sql)
+1. Open your Database Server Client like SSMS and enter below sql statements
+ ```bash
+CREATE DATABASE QueryDocsDb;
+GO;
+USE QueryDocsDb;
+```
+2. Run the [Migration Script](QueyDocs.Infrastructure/SqlScripts/DbSetupScript.sql)
    
 ---
 
