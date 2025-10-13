@@ -57,7 +57,7 @@ namespace QueryDocs.Services.PineconeServices
                 Values = chunk.Vector,
                 Metadata = new MetadataMap
                 {
-                    ["user"] = userId,
+                    ["user"] = userId.ToString(),
                     ["file_name"] = fileName,
                     ["original_text"] = chunk.ChunkText,
                     ["uploaded_at"] = DateTime.UtcNow.ToString("o")
@@ -82,6 +82,8 @@ namespace QueryDocs.Services.PineconeServices
                 }
             };
 
+
+
             var searchResult = await index.Query(queryVector, topK: Convert.ToUInt32(query.TopK), includeMetadata: true, filter: searchFilter);
 
             if (searchResult.Length == 0)
@@ -104,7 +106,7 @@ namespace QueryDocs.Services.PineconeServices
 
                 var history = string.Join("\n", previousChats.Select(c => $"UserQuery: {c.Query}\nBotReponse: {c.Response}\n"));
 
-                var systemMessage = ChatMessage.CreateSystemMessage(@"
+                var systemMessage = @"
                     You are a helpful, friendly, and professional AI assistant. 
                     Your goal is to provide accurate, concise, and context-aware responses in a human friendly way.
 
@@ -115,15 +117,16 @@ namespace QueryDocs.Services.PineconeServices
                     - Start with a simple explanation before adding technical depth and keep it short and concise.
                     - Use only the information from the provided context or previous conversation.
                     - Never fabricate or assume facts not found in the given data.
-                    - When the question refers to past conversation, incorporate the relevant history into your answer."
-                );
+                    - When the question refers to past conversation, incorporate the relevant history into your answer.";
 
-                var userMessage = ChatMessage.CreateUserMessage($@"
+
+
+                var userMessage = $@"
                     Previous conversation: {history}
                     Context from documents: {context}
                     New question: {query.Query}
-                    Answer:"
-                );
+                    Answer:";
+                
 
                 //var messages = new List<ChatMessage>
                 //{
