@@ -9,10 +9,10 @@ namespace QueryDocs.API.Controllers
     [Authorize]
     [Route("api/query")]
     [ApiController]
-    public class QueryController : ControllerBase
+    public class QueryController : BaseAPIController
     {
         private readonly IPineconeService pineconeService;
-        public QueryController(IPineconeService pineconeService)
+        public QueryController(IPineconeService pineconeService, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
             this.pineconeService = pineconeService;
         }
@@ -27,7 +27,7 @@ namespace QueryDocs.API.Controllers
             }
             else
             {
-                result = await pineconeService.GenerateAnswer(query);
+                result = await pineconeService.GenerateAnswer(query, LoggedInUserId);
             }
             return result;
         }

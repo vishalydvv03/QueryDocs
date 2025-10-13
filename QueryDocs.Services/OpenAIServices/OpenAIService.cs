@@ -16,7 +16,7 @@ namespace QueryDocs.Services.OpenAIServices
             this.client = client;
             this.openAiSettings = openAiSettings.Value;
         }
-        public async Task<float[]> CreateEmbeddings(string text)
+        public async Task<float[]> CreateEmbeddingsFromOpenAI(string text)
         {
             var embeddingClient = client.GetEmbeddingClient(openAiSettings.EmbeddingModel);
             var response = await embeddingClient.GenerateEmbeddingAsync(input: text);

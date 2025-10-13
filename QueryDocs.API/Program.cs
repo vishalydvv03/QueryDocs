@@ -11,9 +11,12 @@ using QueryDocs.Domain.Models;
 using QueryDocs.Infrastructure.DbContexts;
 using QueryDocs.Services.AuthenticationServices;
 using QueryDocs.Services.DocumentServices;
+using QueryDocs.Services.HuggingFaceServices;
 using QueryDocs.Services.JwtTokenServices;
 using QueryDocs.Services.OpenAIServices;
+using QueryDocs.Services.OpenRouterServices;
 using QueryDocs.Services.PineconeServices;
+using QueryDocs.Services.UserServices;
 using System.Text;
 
 namespace QueryDocs.API
@@ -30,6 +33,7 @@ namespace QueryDocs.API
                 builder.Services.AddDbContext<ChatDbContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
                 builder.Services.AddScoped<IAuthService, AuthService>();
+                builder.Services.AddScoped<IUserService, UserService>();
                 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
                 builder.Services.AddScoped<PasswordHasher<User>>();
                 builder.Services.AddScoped<IPineconeService, PineconeService>();
@@ -37,6 +41,7 @@ namespace QueryDocs.API
                 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
                 builder.Services.Configure<PineconeSettings>(builder.Configuration.GetSection("Pinecone"));
                 builder.Services.Configure<OpenAISettings>(builder.Configuration.GetSection("OpenAI"));
+                builder.Services.Configure<HuggingFaceSettings>(builder.Configuration.GetSection("HuggingFace"));
                 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
                 builder.Services.AddSingleton<PineconeClient>(sp =>
                 {
@@ -48,6 +53,23 @@ namespace QueryDocs.API
                     var settings = sp.GetRequiredService<IOptions<OpenAISettings>>().Value;
                     return new OpenAIClient(settings.OpenAIApiKey);
                 });
+                builder.Services.AddHttpClient("HuggingFaceClient", (sp, client) =>
+                {
+                    var settings = sp.GetRequiredService<IOptions<HuggingFaceSettings>>().Value;
+                    client.BaseAddress = new Uri(settings.BaseUrl);
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                });
+                builder.Services.AddScoped<IHuggingFaceService, HuggingFaceService>();
+                builder.Services.Configure<OpenRouterSettings>(builder.Configuration.GetSection("OpenRouter"));
+                builder.Services.AddHttpClient("OpenRouterClient", (sp, client) =>
+                {
+                    var settings = sp.GetRequiredService<IOptions<OpenRouterSettings>>().Value;
+                    client.BaseAddress = new Uri(settings.BaseUrl);
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                });
+                builder.Services.AddScoped<IOpenRouterService, OpenRouterService>();
                 builder.Services.AddHttpContextAccessor();
 
                 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

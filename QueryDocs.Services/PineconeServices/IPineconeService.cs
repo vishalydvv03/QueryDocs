@@ -5,7 +5,7 @@ namespace QueryDocs.Services.PineconeServices
 {
     public interface IPineconeService
     {
-        Task UpsertEmbeddingsAsync(List<EmbeddingChunk> embeddingChunks, string fileName);
-        Task<ServiceResult> GenerateAnswer(QueryRequest query);
+        Task UpsertEmbeddingsAsync(List<EmbeddingChunk> embeddingChunks, string fileName, int userId);
+        Task<ServiceResult> GenerateAnswer(QueryRequest query, int userId);
     }
 }

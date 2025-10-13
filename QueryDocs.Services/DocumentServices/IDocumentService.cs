@@ -5,6 +5,6 @@ namespace QueryDocs.Services.DocumentServices
 {
     public interface IDocumentService
     {
-        Task<ServiceResult> ProcessDocument(IFormFile file);
+        Task<ServiceResult> ProcessDocument(IFormFile file, int userId);
     }
 }

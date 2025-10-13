@@ -8,8 +8,10 @@ using QueryDocs.Domain.Entities;
 using QueryDocs.Domain.Models;
 using QueryDocs.Infrastructure.DbContexts;
 using QueryDocs.Infrastructure.ResponseHelpers;
+using QueryDocs.Services.HuggingFaceServices;
 using QueryDocs.Services.OpenAIServices;
-using System.Security.Claims;
+using QueryDocs.Services.OpenRouterServices;
+
 
 
 namespace QueryDocs.Services.PineconeServices
@@ -17,32 +19,37 @@ namespace QueryDocs.Services.PineconeServices
     public class PineconeService : IPineconeService
     {
         private readonly ChatDbContext dbContext;
-        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly PineconeClient pineconeClient;
+        private readonly IHuggingFaceService hfService;
         private readonly IOpenAIService openAiService;
+        private readonly IOpenRouterService openRouterService;
         private readonly PineconeSettings pineconeSettings;
 
-        public PineconeService(IOptions<PineconeSettings> pineconeSettings, IHttpContextAccessor httpContextAccessor, OpenAIClient openAiClient, IOpenAIService openAiService, IOptions<OpenAISettings> openAiSettings, PineconeClient pineconeClient, ChatDbContext dbContext)
+        public PineconeService(IOptions<PineconeSettings> pineconeSettings, OpenAIClient openAiClient, IHuggingFaceService hfService, IOpenAIService openAiService, IOpenRouterService openRouterService, IOptions<OpenAISettings> openAiSettings, PineconeClient pineconeClient, ChatDbContext dbContext)
         {
             this.pineconeClient = pineconeClient;
             this.pineconeSettings = pineconeSettings.Value;
-            this.httpContextAccessor = httpContextAccessor;
+            this.hfService = hfService;
             this.openAiService = openAiService;
+            this.openRouterService = openRouterService;
             this.dbContext = dbContext;
         }
 
-        public async Task UpsertEmbeddingsAsync(List<EmbeddingChunk> embeddingChunks, string fileName)
+        public async Task UpsertEmbeddingsAsync(List<EmbeddingChunk> embeddingChunks, string fileName, int userId)
         {
-            var userId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier) ?? "anonymous";
-
             var index = await pineconeClient.GetIndex(pineconeSettings.Index);
 
-            var filter = new MetadataMap
-            {
-                ["user"] = userId
-            };
-            await index.Delete(filter);
             var uniqueId = Guid.NewGuid();
+
+            var searchFilter = new MetadataMap
+            {
+                ["user"] = new MetadataMap
+                {
+                    ["$eq"] = userId.ToString()
+                }
+            };
+
+            await index.Delete(searchFilter);
 
             var vectors = embeddingChunks.Select((chunk, i) => new Vector
             {
@@ -60,13 +67,12 @@ namespace QueryDocs.Services.PineconeServices
             await index.Upsert(vectors);
         }
 
-        public async Task<ServiceResult> GenerateAnswer(QueryRequest query)
+        public async Task<ServiceResult> GenerateAnswer(QueryRequest query,int userId)
         {
             var result = new ServiceResult();
-            var userId = Convert.ToInt32(httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
             var index = await pineconeClient.GetIndex(pineconeSettings.Index);
-            var queryVector = await openAiService.CreateEmbeddings(query.Query);
+            var queryVector = await hfService.CreateEmbeddingsFromHuggingFace(query.Query);
 
             var searchFilter = new MetadataMap
             {
@@ -119,17 +125,18 @@ namespace QueryDocs.Services.PineconeServices
                     Answer:"
                 );
 
-                var messages = new List<ChatMessage>
-                {
-                    systemMessage,
-                    userMessage
-                };
+                //var messages = new List<ChatMessage>
+                //{
+                //    systemMessage,
+                //    userMessage
+                //};
 
-                var chatClient = openAiService.GetChatClient();
+                //var chatClient = openAiService.GetChatClient();
 
-                ChatCompletion completion = await chatClient.CompleteChatAsync(messages);
-                string answer = completion.Content[0].Text;
+                //ChatCompletion completion = await chatClient.CompleteChatAsync(messages);
+                //string answer = completion.Content[0].Text;
 
+                var answer = await openRouterService.CompleteChat($"{systemMessage}\n{userMessage}") ?? string.Empty;
                 var log = new ChatLog
                 {
                     Query = query.Query,

@@ -2,16 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using QueryDocs.Infrastructure.ResponseHelpers;
 using QueryDocs.Services.DocumentServices;
+using QueryDocs.Services.UserServices;
 
 namespace QueryDocs.API.Controllers
 {
     [Authorize]
     [Route("api/docs")]
     [ApiController]
-    public class DocumentsController : ControllerBase
+    public class DocumentsController : BaseAPIController
     {
         private readonly IDocumentService documentService;
-        public DocumentsController(IDocumentService documentService)
+        public DocumentsController(IDocumentService documentService, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
         {
             this.documentService = documentService;
         }
@@ -27,7 +28,7 @@ namespace QueryDocs.API.Controllers
             }
             else
             {
-                result = await documentService.ProcessDocument(file);
+                result = await documentService.ProcessDocument(file, LoggedInUserId);
             }
 
             return result;

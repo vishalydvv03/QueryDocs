@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using QueryDocs.Domain.Models;
 using QueryDocs.Infrastructure.ResponseHelpers;
-using QueryDocs.Services.OpenAIServices;
+using QueryDocs.Services.HuggingFaceServices;
 using QueryDocs.Services.PineconeServices;
 using System.Text;
 using UglyToad.PdfPig;
@@ -13,14 +13,14 @@ namespace QueryDocs.Services.DocumentServices
     {
       
         private readonly IPineconeService pineconeService;
-        private readonly IOpenAIService openAiService;
-        public DocumentService(IPineconeService pineconeService, IOpenAIService openAiService)
+        private readonly IHuggingFaceService hfService;
+        public DocumentService(IPineconeService pineconeService, IHuggingFaceService hfService)
         { 
             this.pineconeService = pineconeService;
-            this.openAiService = openAiService; 
+            this.hfService = hfService; 
         }
 
-        public async Task<ServiceResult> ProcessDocument(IFormFile file)
+        public async Task<ServiceResult> ProcessDocument(IFormFile file, int userId)
         {
             var result = new ServiceResult();
             var text = await ExtractText(file);
@@ -41,17 +41,18 @@ namespace QueryDocs.Services.DocumentServices
 
                     foreach (var chunk in chunks)
                     {
-                        var vector = await openAiService.CreateEmbeddings(chunk);
+                        //var vector = await openAiService.CreateEmbeddingsFromOpenAI(chunk);  
+                        var vector = await hfService.CreateEmbeddingsFromHuggingFace(chunk);
                         embeddingChunks.Add(new EmbeddingChunk(vector, chunk));
                     }
 
                     if (embeddingChunks == null || embeddingChunks.Count == 0)
                     {
-                        result.SetFailure("OpenAI API returned no embeddings.");
+                        result.SetFailure("API returned no embeddings.");
                     }
                     else
                     {
-                        await pineconeService.UpsertEmbeddingsAsync(embeddingChunks, file.FileName);
+                        await pineconeService.UpsertEmbeddingsAsync(embeddingChunks, file.FileName, userId);
 
                         result.SetSuccess($"Stored {embeddingChunks.Count} embeddings in Pinecone for {file.FileName}");
                     }
@@ -102,7 +103,7 @@ namespace QueryDocs.Services.DocumentServices
             return text;
         }
 
-        private List<string> ChunkText(string text, int chunkSize = 1000, int overlap = 200)
+        private List<string> ChunkText(string text, int chunkSize = 500, int overlap = 200)
         {
             var chunks = new List<string>();
 

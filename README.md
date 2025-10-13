@@ -106,9 +106,6 @@ USE QueryDocsDb;
 
 ---
 
-## 👨‍💻 Author
-**Vishal Yadav**  
-📧 [vishaljyadav576@gmail.com](mailto:vishaljyadav576@gmail.com)  
 
 
 
