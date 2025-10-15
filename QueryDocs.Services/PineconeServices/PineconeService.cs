@@ -39,21 +39,25 @@ namespace QueryDocs.Services.PineconeServices
         {
             var index = await pineconeClient.GetIndex(pineconeSettings.Index);
 
-            var uniqueId = Guid.NewGuid();
+            var vectorId = $"{userId}-{fileName}-0";
 
-            var searchFilter = new MetadataMap
+            var queryResult = await index.Query(vectorId, topK: 1);
+
+            if (queryResult.Any())
             {
-                ["user"] = new MetadataMap
+                var searchFilter = new MetadataMap
                 {
-                    ["$eq"] = userId.ToString()
-                }
-            };
-
-            await index.Delete(searchFilter);
+                    ["user"] = new MetadataMap
+                    {
+                        ["$eq"] = userId.ToString()
+                    }
+                };
+                await index.Delete(filter: searchFilter);
+            }
 
             var vectors = embeddingChunks.Select((chunk, i) => new Vector
             {
-                Id = $"{userId}-{fileName}-{i}-{uniqueId}",
+                Id = vectorId,
                 Values = chunk.Vector,
                 Metadata = new MetadataMap
                 {
