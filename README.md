@@ -27,7 +27,12 @@ The system integrates **document retrieval**, **vector embeddings**, and **Gener
 2. **Vector Database:** Stores and retrieves vector embeddings using Pinecone   
 3. **LLM Integration:** Generates responses using models like (Embedding Model -> text-embedding-3-small , Chat Model -> gpt-4o-mini)
 4. **Relational DB :** SQL Server stores users, chat histories and exception logs.
-5. **Authentication :** JWT Authentication 
+5. **Authentication :** JWT Authentication
+
+---
+
+### System Architecture
+[](Documentation/QueryDocs- System Architecture.png)
 
 ---
 
