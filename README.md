@@ -42,19 +42,30 @@ cd RAGChatBot
 
 ### 2️⃣ Obtain API Keys
 
-#### OpenAI API Key
-1. Sign up or log in at [OpenAI](https://platform.openai.com/).  
-2. Navigate to **API Keys** in your account settings.  
-3. Click **Create new secret key** and copy it.  
-4. Keep it safe; you will need it for the `.env` or `appsettings.json` file.  
-
 #### Pinecone API Key
 1. Sign up or log in at [Pinecone](https://www.pinecone.io/).  
 2. Navigate to **API Keys** in your account dashboard.  
 3. Click **Create new API key** and copy it.  
 4. Note your **environment name** (e.g., `us-east1-gcp`).  
-5. Keep it safe; you will need it for the `.env` or `appsettings.json` file.
+5. Keep it safe; you will need it for the `appsettings.json` file.
 
+#### OpenAI API Key
+1. Sign up or log in at [OpenAI](https://platform.openai.com/).  
+2. Navigate to **API Keys** in your account settings.  
+3. Click **Create new secret key** and copy it.  
+4. Keep it safe; you will need it for `appsettings.json` file.
+
+#### HuggingFace Access Token
+1. Sign up or log in at [HuggingFace](https://huggingface.co/).  
+2. Navigate to **Access Tokens** in your account settings.  
+3. Click **Create new access token**, give read permissions and copy it.  
+4. Keep it safe; you will need it for `appsettings.json` file.  
+
+#### OpenRouter API Key
+1. Sign up or log in at [OpenRouter](https://openrouter.ai/).  
+2. Navigate to **Keys** in your account settings.  
+3. Click **Create API Key** and copy it.  
+4. Keep it safe; you will need it for `appsettings.json` file.  
 ---
 
 ### 3️⃣ Configure appsettings.json file
