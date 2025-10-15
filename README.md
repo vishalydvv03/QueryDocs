@@ -32,7 +32,7 @@ The system integrates **document retrieval**, **vector embeddings**, and **Gener
 ---
 
 ### System Architecture
-[](Documentation/QueryDocs- System Architecture.png)
+![System Architecture](Documentation/QueryDocs- System Architecture.png)
 
 ---
 
