@@ -57,7 +57,7 @@ namespace QueryDocs.Services.PineconeServices
 
             var vectors = embeddingChunks.Select((chunk, i) => new Vector
             {
-                Id = vectorId,
+                Id = $"{userId}-{fileName}-{i}",
                 Values = chunk.Vector,
                 Metadata = new MetadataMap
                 {
